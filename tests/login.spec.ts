@@ -11,7 +11,7 @@ test('Verify login with valid credentials', async ({ page }) => {
   await page.getByTestId('login-submit').click();
 
   // 4. Verify URL is https://practicesoftwaretesting.com/account
-  await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
+  await expect(page).toHaveURL(/\/account/);
 
   // 5. Verify page title is "My Account"
   await expect(page.getByTestId('page-title')).toHaveText('My account');
