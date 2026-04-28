@@ -1,4 +1,4 @@
-import test, { chromium, expect } from '@playwright/test';
+import test, { expect } from '@playwright/test';
 test('Verify login with valid credentials', async ({ page }) => {
   // 1. Open URL
   await page.goto('https://practicesoftwaretesting.com/auth/login');
