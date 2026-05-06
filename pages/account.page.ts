@@ -1,0 +1,14 @@
+import { type Page, type Locator } from '@playwright/test';
+import { HeaderFragment } from './HeaderFragment';
+
+export class AccountPage {
+  readonly page: Page;
+  readonly header: HeaderFragment;
+  readonly pageTitle: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.header = new HeaderFragment(page);
+    this.pageTitle = page.locator('[data-test="page-title"]');
+  }
+}

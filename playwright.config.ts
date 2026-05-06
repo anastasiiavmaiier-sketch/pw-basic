@@ -1,4 +1,5 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig} from '@playwright/test';
+import { futimes } from 'node:fs';
 
 /**
  * Read environment variables from file.
