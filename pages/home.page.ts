@@ -11,7 +11,7 @@ export class HomePage {
   }
 
   async open() {
-    await this.page.goto('https://practicesoftwaretesting.com/');
+    await this.page.goto('/');
   }
   async clickOnProduct(name: string) {
     // Шукаємо продукт за його назвою в списку
