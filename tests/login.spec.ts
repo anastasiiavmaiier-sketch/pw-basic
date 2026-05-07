@@ -3,7 +3,7 @@ import { LoginPage } from '../pages/login.page';
 
 test('Verify login with valid credentials', async ({ page }) => {
   const loginPage = new LoginPage(page);
-  await loginPage.page.goto('https://practicesoftwaretesting.com');
+  await loginPage.page.goto('/');
 
   await page.locator('[data-test="nav-sign-in"]').click();
   
