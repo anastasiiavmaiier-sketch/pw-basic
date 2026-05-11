@@ -1,4 +1,4 @@
-import { defineConfig} from '@playwright/test';
+import { defineConfig, devices} from '@playwright/test';
 import { futimes } from 'node:fs';
 
 /**
