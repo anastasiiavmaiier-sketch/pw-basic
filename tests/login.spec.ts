@@ -1,24 +1,27 @@
-import test, { expect } from '@playwright/test';
-test('Verify login with valid credentials', async ({ page }) => {
-  // 1. Open URL
-  await page.goto('https://practicesoftwaretesting.com/auth/login');
+import { test, expect } from '@playwright/test';
 
-  // 2. Fill in credentials
-  await page.getByTestId('email').fill('customer@practicesoftwaretesting.com');
-  await page.getByTestId('password').fill('welcome01');
+test.describe('Authentication Suite', () => {
+  test('Verify login with valid credentials', async ({ page }) => {
+    // 1. Open login page
+    await page.goto('https://practicesoftwaretesting.com/auth/login');
 
-  // 3. Click the Login button
-  await page.getByTestId('login-submit').click();
+    // 2. Fill in credentials
+    await page.getByPlaceholder('Your email').fill('customer@practicesoftwaretesting.com');
+    await page.getByPlaceholder('Your password').fill('welcome01');
 
-  // 4. Verify URL is https://practicesoftwaretesting.com/account
-  await expect(page).toHaveURL(/\/account/);
+    // 3. Click the Login button
+    await page.getByRole('button', { name: 'Login' }).click();
 
-  // 5. Verify page title is "My Account"
-  await expect(page.getByTestId('page-title')).toHaveText('My account');
+    // Assertions
+    // Verify URL is redirected to account page
+    await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
 
-  // 6. Verify username "Jane Doe" appears in the navigation bar
-  await expect(page.getByTestId('nav-menu')).toContainText('Jane Doe');
+    // Verify page title / heading is "My Account"
+    await expect(page.getByRole('heading', { name: 'My account' })).toBeVisible();
+
+    // Verify username "Jane Doe" appears in the navigation bar / menu dropdown
+    await expect(page.locator('[data-test="nav-menu"]')).toContainText('Jane Doe');
+  });
 });
-
 
 
