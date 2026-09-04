@@ -20,7 +20,7 @@ test.describe('Authentication Suite', () => {
     await expect(page.getByRole('heading', { name: 'My account' })).toBeVisible();
 
     // Verify username "Jane Doe" appears in the navigation bar / menu dropdown
-    await expect(page.locator('[data-test="nav-menu"]')).toContainText('Jane Doe');
+    await expect(page.getByTestId('navmenu')).toHaveText('Jane Doe');
   });
 });
 
