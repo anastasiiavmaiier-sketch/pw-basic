@@ -3,25 +3,25 @@ import { testUsers } from '../test-data/users';
 
 test.describe('Authentication Suite', () => {
   test('Verify login with valid credentials', async ({ page }) => {
-    // 1. Відкриваємо сторінку логіну
-    await page.goto('https://practicesoftwaretesting.com/auth/login');
+    // 1. Open the login page
+    await page.goto('/auth/login');
 
-    // 2. Заповнюємо дані користувача через data-test атрибути
-    await page.locator('[data-test="email"]').fill(testUsers.customer.email);
-    await page.locator('[data-test="password"]').fill(testUsers.customer.password);
+    // 2. Fill in user details
+    await page.getByTestId('email').fill(testUsers.customer.email);
+    await page.getByTestId('password').fill(testUsers.customer.password);
 
-    // 3. Тиснемо кнопку входу
-    await page.locator('[data-test="login-submit"]').click();
+    // 3. Submit the login form
+    await page.getByTestId('login-submit').click();
 
     // 4. Assertions
-    // Чекаємо переходу на URL з account (регулярний вираз надійніший за відносний шлях)
-    await expect(page).toHaveURL(/.*account/);
+    // Check that the URL contains '/account' after successful login
+    await expect(page).toHaveURL('/account' );
 
-    // Перевіряємо заголовок сторінки
+    // verify that the "My account" heading is visible on the page
     await expect(page.getByRole('heading', { name: 'My account' })).toBeVisible();
 
-    // Перевіряємо ім'я користувача у меню
-    await expect(page.locator('[data-test="nav-menu"]')).toContainText(testUsers.customer.name);
+    // verify that the user's name is displayed in the navigation menu
+    await expect(page.getByTestId('nav-menu')).toContainText(testUsers.customer.name);
   });
 });
 
