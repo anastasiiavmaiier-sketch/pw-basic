@@ -14,7 +14,7 @@ test.describe('Authentication Suite', () => {
 
     // Assertions
     // Verify URL is redirected to account page
-    await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
+    await expect(page).toHaveURL('/account');
 
     // Verify page title / heading is "My Account"
     await expect(page.getByRole('heading', { name: 'My account' })).toBeVisible();
