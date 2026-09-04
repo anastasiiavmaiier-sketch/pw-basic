@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Authentication Suite', () => {
   test('Verify login with valid credentials', async ({ page }) => {
     // 1. Open login page
-    await page.goto('https://practicesoftwaretesting.com/auth/login');
+    await page.goto('/auth/login');
 
     // 2. Fill in credentials
     await page.getByPlaceholder('Your email').fill('customer@practicesoftwaretesting.com');
