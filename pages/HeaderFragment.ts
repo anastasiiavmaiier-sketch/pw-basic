@@ -7,7 +7,7 @@ export class HeaderFragment {
 
   constructor(page: Page) {
     this.page = page;
-    this.navMenu = page.locator('[data-test="nav-menu"]');
-    this.homeLink = page.locator('[data-test="nav-home"]');
+    this.navMenu = page.getByTestId('nav-menu');
+    this.homeLink = page.getByTestId('nav-home');
   }
 }

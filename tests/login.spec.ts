@@ -13,7 +13,7 @@ test('Verify login with valid credentials', async ({ page }) => {
   //await page.getByTestId('password').fill('welcome01');
   //await page.getByTestId('login-submit').click();
 
-  await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
+  await expect(page).toHaveURL('/account');
   await expect(page.locator('[data-test="page-title"]')).toContainText('My account');
   await expect(page.locator('[data-test="nav-menu"]')).toContainText('Jane Doe');
 });

@@ -14,7 +14,7 @@ export class HomePage {
     await this.page.goto('/');
   }
   async clickOnProduct(name: string) {
-    // Шукаємо продукт за його назвою в списку
-    await this.page.locator('.card', { hasText: name }).click();
+    // Select the product card based on the provided name and click on it
+    await this.page.getByRole('link', { name: name }).click();
   }
 }
