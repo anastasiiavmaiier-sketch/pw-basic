@@ -7,7 +7,7 @@ test('Verify login with valid credentials', async ({ page }) => {
 
   await page.locator('[data-test="nav-sign-in"]').click();
   
-  await loginPage.performLogin('customer@practicesoftwaretesting.com', 'welcome01');
+  await loginPage.performLogin(page);
 
   //await page.getByTestId('email').fill('customer@practicesoftwaretesting.com');
   //await page.getByTestId('password').fill('welcome01');
