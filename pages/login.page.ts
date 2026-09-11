@@ -1,20 +1,28 @@
-import { Page, Locator } from "@playwright/test";
-export class LoginPage {
-    readonly page: Page;
-    readonly emailInput: Locator;
-    readonly passwordInput: Locator;
-    readonly loginButton: Locator;
+import { type Page, type Locator } from '@playwright/test';
 
-    constructor(page: Page) {
-        this.page = page;
-        this.emailInput = page.locator('[data-test="email"]');
-        this.passwordInput = page.locator('[data-test="password"]');
-        this.loginButton = page.locator('[data-test="login-submit"]');
-    }
-  
-    async performLogin(page: Page): Promise<void> {
-        await page.locator('[data-test="email"]').fill('customer@practicesoftwaretesting.com');
-        await page.locator('[data-test="password"]').fill('welcome01');
-        await page.locator('[data-test="login-submit"]').click();
-    }
+export class LoginPage {
+  readonly page: Page;
+  readonly emailInput: Locator;
+  readonly passwordInput: Locator;
+  readonly submitButton: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.emailInput = page.getByTestId('email');
+    this.passwordInput = page.getByTestId('password');
+    this.submitButton = page.getByTestId('login-submit');
+  }
+
+  async open(): Promise<void> {
+    await this.page.goto('/auth/login');
+  }
+
+  async performLogin(
+    email = 'customer@practicesoftwaretesting.com',
+    password = 'welcome01'
+  ): Promise<void> {
+    await this.emailInput.fill(email);
+    await this.passwordInput.fill(password);
+    await this.submitButton.click();
+  }
 }
