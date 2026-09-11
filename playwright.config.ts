@@ -1,12 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
+ * Шлях до файлу збереженого стану сесії
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+export const STORAGE_STATE = path.join(__dirname, '.auth/user.json');
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -60,19 +58,32 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    // 1. Проєкт авторизації (виконується найпершим)
+    {
+      name: 'auth',
+      testMatch: /.*auth\.login\.spec\.ts/,
+    },
+
+    // 2. Основний проєкт chromium, що залежить від проєкту 'auth'
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      dependencies: ['auth'],
+      testIgnore: /.*auth\.login\.spec\.ts/,
     },
 
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
+    //   dependencies: ['auth'],
+    //   testIgnore: /.*auth\.login\.spec\.ts/,
     // },
 
     // {
     //   name: 'webkit',
     //   use: { ...devices['Desktop Safari'] },
+    //   dependencies: ['auth'],
+    //   testIgnore: /.*auth\.login\.spec\.ts/,
     // },
   ],
 });
